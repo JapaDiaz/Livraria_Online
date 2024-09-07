@@ -1,29 +1,86 @@
-// Adiciona listener para buscar quando apertar Enter
-document.getElementById("campo-pesquisa").addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        pesquisar();
+// Define o modo escuro como padrão ao carregar a página
+document.addEventListener("DOMContentLoaded", function () {
+    const temaAtual = localStorage.getItem("tema");
+    const iconeTema = document.getElementById("icone-tema");
+
+    // Verifica o tema salvo no localStorage e aplica o tema adequado
+    if (!temaAtual || temaAtual === "escuro") {
+        document.body.classList.add("dark-mode");
+        iconeTema.classList.remove("fa-sun");
+        iconeTema.classList.add("fa-moon");
+        localStorage.setItem("tema", "escuro"); // Armazena o tema no localStorage
+    } else {
+        document.body.classList.remove("dark-mode");
+        iconeTema.classList.remove("fa-moon");
+        iconeTema.classList.add("fa-sun");
     }
 });
 
-// Adiciona funcionalidade ao botão "X" para limpar a pesquisa
+// Adiciona funcionalidade ao botão para alternar tema
+document.getElementById("alternar-tema").addEventListener("click", function () {
+    const iconeTema = document.getElementById("icone-tema");
+    document.body.classList.toggle("dark-mode");
+
+    // Altera o ícone do botão de acordo com o tema selecionado
+    if (document.body.classList.contains("dark-mode")) {
+        iconeTema.classList.remove("fa-sun");
+        iconeTema.classList.add("fa-moon");
+        localStorage.setItem("tema", "escuro"); // Salva o tema escuro
+    } else {
+        iconeTema.classList.remove("fa-moon");
+        iconeTema.classList.add("fa-sun");
+        localStorage.setItem("tema", "claro"); // Salva o tema claro
+    }
+});
+
+// Função que fixa a barra de pesquisa ao rolar a página
+window.onscroll = function () {
+    fixarBarraDePesquisa();
+};
+
+let barraDePesquisa = document.querySelector('.pesquisa-fixa');
+let posicaoInicialBarra = barraDePesquisa.offsetTop; // Obtém a posição inicial da barra
+
+function fixarBarraDePesquisa() {
+    // Se o usuário rolar a página até a posição da barra de pesquisa, fixa ela no topo
+    if (window.pageYOffset > posicaoInicialBarra) {
+        barraDePesquisa.classList.add("fixa");
+    } else {
+        barraDePesquisa.classList.remove("fixa");
+    }
+}
+
+// Listener para buscar quando apertar Enter
+document.getElementById("campo-pesquisa").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        pesquisar(); // Chama a função de pesquisa
+    }
+});
+
+// Listener para buscar enquanto o usuário digita
+document.getElementById("campo-pesquisa").addEventListener("input", function () {
+    pesquisar(); // Realiza a pesquisa ao detectar mudanças no campo de texto
+});
+
+// Limpa a pesquisa e restaura a tela inicial
 document.getElementById("limpar-pesquisa").addEventListener("click", function () {
     document.getElementById("campo-pesquisa").value = "";
     document.getElementById("resultados-pesquisa").style.display = "none";
-    document.querySelector('.inicial').style.display = "block"; // Mostra a seção inicial novamente, caso ela exista
-    this.style.display = "none"; // Esconde o botão X
+    document.querySelector('.inicial').style.display = "block"; // Mostra a seção inicial novamente
+    this.style.display = "none"; // Esconde o botão "X"
 });
 
 // Carrega comentários e avaliações do LocalStorage ao iniciar
 function carregarComentarios() {
     let comentariosSalvos = localStorage.getItem("comentariosLivros");
     if (comentariosSalvos) {
-        livros = JSON.parse(comentariosSalvos);
+        livros = JSON.parse(comentariosSalvos); // Carrega os dados salvos
     }
 }
 
 // Salva os comentários e avaliações no LocalStorage
 function salvarComentarios() {
-    localStorage.setItem("comentariosLivros", JSON.stringify(livros));
+    localStorage.setItem("comentariosLivros", JSON.stringify(livros)); // Salva os dados no localStorage
 }
 
 // Função de pesquisa por título, autor, descrição ou gênero
@@ -34,7 +91,7 @@ function pesquisar() {
     if (!campoPesquisa) {
         section.innerHTML = "<p>Nada foi encontrado. Você precisa digitar o nome de um livro ou autor</p>";
         section.style.display = "none"; // Esconde a seção se não houver busca
-        document.getElementById("limpar-pesquisa").style.display = "none"; // Esconde o botão X
+        document.getElementById("limpar-pesquisa").style.display = "none"; // Esconde o botão "X"
         document.querySelector('.inicial').style.display = "block"; // Mostra a seção inicial
         return;
     }
@@ -63,7 +120,7 @@ function pesquisar() {
 
     section.innerHTML = resultados;  // Exibe os resultados na página
     section.style.display = "block"; // Exibe a seção de resultados
-    document.getElementById("limpar-pesquisa").style.display = "block"; // Exibe o botão X
+    document.getElementById("limpar-pesquisa").style.display = "block"; // Exibe o botão "X"
 }
 
 // Função que gera o HTML para um livro encontrado
@@ -129,7 +186,7 @@ function avaliar(id) {
 
     // Calcula e exibe a média de avaliação
     let media = calcularMedia(livro.avaliacao);
-    document.getElementById(`media-avaliacao-${id}`).innerText = `Média de Avaliação: ${media.toFixed(1)} estrelas`;
+    document.getElementById(`media-avaliacao-${livro.id}`).innerText = `Média de Avaliação: ${media.toFixed(1)} estrelas`;
 
     // Salva as avaliações no LocalStorage
     salvarComentarios();
@@ -139,26 +196,6 @@ function avaliar(id) {
 function calcularMedia(avaliacoes) {
     if (avaliacoes.length === 0) return 0;
     return avaliacoes.reduce((a, b) => a + b, 0) / avaliacoes.length;
-}
-
-// Função para filtrar livros por gênero
-function filtrarPorGenero() {
-    let generoSelecionado = document.getElementById("filtro-genero").value.toLowerCase();
-    let resultados = "";
-
-    // Filtra os livros com base no gênero selecionado
-    for (let livro of livros) {
-        if (generoSelecionado === "todos" || livro.genero.toLowerCase().includes(generoSelecionado)) {
-            resultados += gerarHTMLLivro(livro);
-        }
-    }
-
-    document.getElementById("resultados-pesquisa").innerHTML = resultados;  // Atualiza os resultados filtrados
-}
-
-// Função para alternar entre tema claro e escuro
-function alternarTema() {
-    document.body.classList.toggle('dark-mode');
 }
 
 // Ao carregar a página, recupera os comentários e avaliações salvos
