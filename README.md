@@ -1,5 +1,5 @@
-#Desafio Alura: Imersão Dev com Google Gemini
 
+# Desafio Alura: Imersão Dev com Google Gemini
 
 # 📚 Biblioteca de Livros
 
@@ -143,7 +143,7 @@ Este projeto foi criado utilizando uma abordagem iterativa e colaborativa. Diver
 
 ## 📸 Capturas de Tela
 
-![Biblioteca de Livros - Página Inicial]![Pagina Inicial](/image.png)
+![Biblioteca de Livros - Página Inicial](image.png)
 
 ## 🔮 Futuras Implementações
 
@@ -160,7 +160,6 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e enviar 
 3. Faça commit das suas alterações: `git commit -m 'Adiciona nova feature'`.
 4. Faça push para a branch: `git push origin minha-nova-feature`.
 5. Envie um pull request.
-
 
 ---
 
