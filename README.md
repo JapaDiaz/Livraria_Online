@@ -141,7 +141,7 @@ Este projeto foi criado utilizando uma abordagem iterativa e colaborativa. Diver
 
 ## 📸 Capturas de Tela
 
-![Biblioteca de Livros - Página Inicial]![Pagina Inicial](image.png)
+![Biblioteca de Livros - Página Inicial]![Pagina Inicial](/image.png)
 
 ## 🔮 Futuras Implementações
 
