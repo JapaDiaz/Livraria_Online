@@ -1,0 +1,240 @@
+/* Importa a fonte Chakra Petch do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400&display=swap');
+
+/* Estiliza o corpo da página */
+body {
+    font-family: "Chakra Petch", sans-serif;
+    background-color: #F4F4F9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1rem;
+    overflow-x: hidden;
+}
+
+.dark-mode {
+    background-color: #222;
+    color: #fff;
+}
+
+/* Mantém o footer fixo */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #DDDDDD;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Mantém o campo de pesquisa fixo */
+.pesquisa-fixa {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #DDDDDD;
+    padding: 1rem;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Estiliza a caixa de input com o botão de limpar */
+.input-container {
+    position: relative;
+    width: 100%;
+    max-width: 30rem;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    font-size: 1rem;
+    border: none;
+    box-sizing: border-box;
+}
+
+#limpar-pesquisa {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #222831;
+    cursor: pointer;
+}
+
+/* Estiliza o botão de busca */
+.pesquisa-fixa button {
+    padding: 0.8rem 1.2rem;
+    border-radius: 1.5rem;
+    background-color: #30475E;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+/* Estiliza a área de resultados como flexbox para cards */
+.resultados-pesquisa {
+    display: none;
+    width: 100%;
+    max-width: 60rem;
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 0.6rem;
+    background-color: #F5F7F8;
+}
+
+.dark-mode .resultados-pesquisa {
+    background-color: #222;
+}
+
+/* Estiliza os itens como cards no estilo Facebook */
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    max-width: 40rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .card {
+    background: #333;
+    color: #fff;
+}
+
+.dark-mode .card a {
+    color: #F5F7F8;
+}
+
+/* Estiliza a imagem do livro no card (ou um espaço reservado) */
+.card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    object-fit: cover;
+    max-height: 200px;
+}
+
+.card .descricao-meta {
+    margin-bottom: 1rem;
+    color: #45474B;
+    font-size: 1rem;
+}
+
+.dark-mode .descricao-meta {
+    color: #ccc;
+}
+
+/* Botões de interação no estilo Facebook (comentar, avaliar) */
+.card .acoes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.card .acoes button {
+    background: #30475E;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.card .acoes button:hover {
+    background: #1f2c3a;
+}
+
+/* Estilos das avaliações */
+.card select {
+    padding: 0.4rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.card .avaliacao {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+.dark-mode .avaliacao {
+    color: #fff;
+}
+
+/* Estilos da imagem da página inicial */
+#imagem-livraria {
+    width: 50%;
+    border-radius: 20px;
+    /* Bordas arredondadas */
+    opacity: 0.8;
+    /* Deixa a imagem mais apagada */
+    transition: opacity 0.3s ease-in-out;
+}
+
+#imagem-livraria:hover {
+    opacity: 1;
+    /* A imagem volta ao normal ao passar o mouse */
+}
+
+/* Seção inicial (imagem e texto) */
+.inicial {
+    text-align: center;
+    margin-top: 100px;
+}
+
+/* Estilos do texto da introdução */
+.inicial p {
+    font-size: 1.2rem;
+    color: #30475E;
+    margin-top: 20px;
+    letter-spacing: 1px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .pesquisa-fixa {
+        flex-direction: column;
+        padding: 1rem 2rem;
+    }
+
+    .input-container,
+    .pesquisa-fixa button {
+        width: 100%;
+    }
+
+    .resultados-pesquisa {
+        width: 100%;
+    }
+
+    .card {
+        width: 100%;
+    }
+}

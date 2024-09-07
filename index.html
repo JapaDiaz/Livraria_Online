@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <!-- Link do CDN do Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="livros32x32.png" type="image/png">
+    <title>Biblioteca de Livros</title>
+</head>
+
+<body>
+    <header>
+        <h1>Biblioteca de Livros</h1>
+    </header>
+    <main>
+        <section class="pesquisa-fixa">
+            <div class="input-container">
+                <input type="text" placeholder="Digite o nome do livro ou autor" id="campo-pesquisa">
+                <button id="limpar-pesquisa" style="display:none;">X</button>
+            </div>
+            <button onclick="pesquisar()">Pesquisar</button>
+        </section>
+
+        <section class="inicial">
+            <img src="livraria-anime.png" alt="Imagem de uma livraria" id="imagem-livraria" />
+            <p>Pesquise seu livro, gênero ou autor e registre seu feedback</p>
+        </section>
+
+        <section class="resultados-pesquisa" id="resultados-pesquisa" style="display: none;">
+        </section>
+
+        <!-- Formulário para adicionar um novo livro (opcional) -->
+        <section id="adicionar-livro-section" style="display:none;">
+            <h2>Adicionar Livro</h2>
+            <input type="text" id="novo-titulo" placeholder="Título do Livro" required>
+            <input type="text" id="novo-autor" placeholder="Autor" required>
+            <textarea id="nova-descricao" placeholder="Descrição"></textarea>
+            <input type="text" id="novo-genero" placeholder="Gênero" required>
+            <input type="text" id="novo-link" placeholder="Link (opcional)">
+            <button onclick="adicionarLivro()">Adicionar Livro</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>2024 - Biblioteca de Livros. Todos os direitos reservados</p>
+        <p>Desenvolvido por Pedro Dias. <a href="https://github.com/JapaDiaz"><i class="fab fa-github"></i> GitHub</a>
+        </p>
+    </footer>
+
+    <script src="dados.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
